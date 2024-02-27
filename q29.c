@@ -21,11 +21,11 @@ int main(){
 		printf("Invalid choice : %d",choice);
 	}
 	if (choice == 1){
-		sched_setscheduler(getpid(), SCHED_RR, &sp);
+		sched_setscheduler(getpid(), SCHED_RR, &sp); // modifying the present scheduling policy to SCHED_RR
 		printf("Scheduling policy changed to SCHED_RR\n");
 		printf("The current scheduling policy is: %d\n", sched_getscheduler(getpid()));
 	}
-	else if (choice == 2){
+	else if (choice == 2){ // modifying the scheduling policy to SCHED_FIFO
 		sched_setscheduler(getpid(), SCHED_FIFO, &sp);
 		printf("Scheduling policy changed to SCHED_FIFO\n");
 		printf("The current scheduling policy is: %d\n", sched_getscheduler(getpid()));

@@ -27,6 +27,5 @@ int main() {
         // Back to running state
         printf("Process resumed...\n");
     }
-
     return 0;
 }

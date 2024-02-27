@@ -8,8 +8,8 @@
 file using the fcntl system call. */
 
 int main(){
-	int fd = open("file2.txt", O_RDONLY);
-	int res = fcntl(fd, F_GETFL);
+	int fd = open("file2.txt", O_CREAT|O_RDONLY);
+	int res = fcntl(fd, F_GETFL); // getting file status flags
 	printf("fcntl returns : %d\n",res);
 
 	if (res < 0){

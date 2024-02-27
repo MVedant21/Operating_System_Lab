@@ -11,13 +11,13 @@ int main(){
     struct timeval t_val;
     int retval;
 
-    t_val.tv_sec = 5;
+    t_val.tv_sec = 10;
     t_val.tv_usec = 0;
 
-    FD_ZERO(&fds);
-    FD_SET(0, &fds);
+    FD_ZERO(&fds); // Clear the file descriptor set
+    FD_SET(0, &fds); // Add file descriptor 0 (stdin) to the set
 
-    retval = select(1 ,&fds, NULL, NULL, &t_val);
+    retval = select(1 ,&fds, NULL, NULL, &t_val); // using select to monitor file descriptor
     if (retval == -1)
     {
         perror("Error");
@@ -26,7 +26,7 @@ int main(){
         printf("Data is available now.\n");
     }
     else{
-        printf("No data available in five seconds.\n");
+        printf("No data available in ten seconds.\n");
     }
     return 0;
 }

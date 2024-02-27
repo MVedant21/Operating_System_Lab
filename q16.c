@@ -15,7 +15,7 @@ int main(int argc, char *argv[]){
 	printf("Type 1 for implementing a write lock OR Type 2 for implementing a read lock\n");
 	scanf("%d",&option);
 
-	if (option == 1){
+	if (option == 1){ // options to implement either a read/write lock
 		char name[100];
 		printf("Enter name of the file:\n");
 		scanf("%s",name);
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
 		lock.l_start = 0;
 		lock.l_len = 0;
 		lock.l_whence = SEEK_SET;
-		lock.l_type = F_RDLCK;
+		lock.l_type = F_RDLCK; // type of lock to be read
 		int fd1;
 		fd1 = open(name, O_RDONLY, 0744);
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 		printf("Locked\n");
 
 		printf("Unlocking\n");
-		lock.l_type = F_UNLCK;
+		lock.l_type = F_UNLCK; // unlock the file after locking it
 		res = fcntl(fd1, F_SETLKW, &lock);
 		if (res < 0){
 			printf("Unlock Unsucessful\n");
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
 		lock.l_start = 0;
 		lock.l_len = 0;
 		lock.l_whence = SEEK_SET;
-		lock.l_type = F_WRLCK;
+		lock.l_type = F_WRLCK; // lock type to be write
 
 		int fd1 = open(name, O_WRONLY, 0744);
 		int res = fcntl(fd1, F_SETLKW, &lock);

@@ -7,7 +7,7 @@ and allows both the child and parent processes to write to the file. Examine the
 the file.*/
 
 int main(int argc, char *argv[]){
-	int fd = open(argv[1], O_WRONLY);
+	int fd = open(argv[1], O_CREAT|O_WRONLY);
 	int res;
 	res =  fork();
 
@@ -16,11 +16,11 @@ int main(int argc, char *argv[]){
 	}
 	else if (res == 0){
 		printf("Child is writing\n");
-		write(fd,"Child is writing",16);
+		write(fd,"Child is writing",sizeof("Child is writing"));
 	}
 	else{
 		printf("Parent is writing\n");
-		write(fd, "Parent is writing", 17);
+		write(fd, "Parent is writing", sizeof("Parent is writing"));
 	}
 	return 0;
 }

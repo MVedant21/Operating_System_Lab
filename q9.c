@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
        		fprintf(stderr,"Usage: %s filename\n",argv[0]);
        		return 1;
     	}
-    	stat(argv[1],&temp);
+    	stat(argv[1],&temp); // gets status information regarding the mentioned file
     	printf("inode number : %ld\n",temp.st_ino);
     	printf("number of hardlinks : %ld\n ",temp.st_nlink);
     	printf("uid : %d\n",temp.st_uid);

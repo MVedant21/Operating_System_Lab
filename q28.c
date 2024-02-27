@@ -1,24 +1,25 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<sys/resource.h>
 #include<unistd.h>
-
-/* Determining and Modifying Program Priority: Find out the priority of your running program 
-and modify it using the nice command.*/
+#include<sys/resource.h>
 
 int main(){
-	int priority = getpriority(PRIO_PROCESS, 0);
 
-	if (priority == -1){
-		printf("Error getting the priority");
-		return 1;
-	}
-	printf("Current priority : %d\n",priority);
+    int priority = getpriority(PRIO_PROCESS, getpid()); // getting the initial priority of the process
+    if(priority == -1){
+        perror("getpriority");
+        return -1;
+    }
+    printf("The priority of the current process is %d\n", priority);
+    printf("Changing the priority of the current process by 5\n");
 
-	int pid = getpid();
-	renice -n priority pid; 
-	priority = getpriority(PRIO_PROCESS,0);
+    nice(5); // changing the priority of the process by five
+    priority = getpriority(PRIO_PROCESS, getpid());
+    if(priority == -1){
+        perror("getpriority");
+        return -1;
+    }
+    printf("The priority of the current process after increment is %d\n", priority); // printing the updated priority
+    
 
-	printf("Updated priority : %d\n",priority);
+}
 	return 0;
 }

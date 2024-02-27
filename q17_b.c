@@ -9,13 +9,13 @@ lock, read the ticket number, increment the number, print the new ticket number,
 close the file.*/
 
 int main(){
-	int n;
+	char ch;
 	printf("Enter a number\n");
-	scanf("%d",&n);
+	scanf("%s",&ch);
 
 	int fd;
 	fd = open("ticket.txt", O_WRONLY | O_CREAT, 0744);
-	write(fd, &n, sizeof(int));
+	write(fd, &ch, sizeof(char));
 	printf("Write successful\n");
 	
 	close(fd);

@@ -20,9 +20,9 @@ int main() {
     scanf("%d", &input);
 
     struct flock lock;
-    lock.l_type = F_WRLCK;
+    lock.l_type = F_WRLCK; // implementing Write lock
     lock.l_whence = SEEK_SET;
-    lock.l_start = (input - 1) * sizeof(int);
+    lock.l_start = (input - 1) * sizeof(int); // start from the given offset
     lock.l_pid = getpid();
 
     printf("Inside Critical Section\n");
@@ -32,11 +32,11 @@ int main() {
     tokennum++;
 
     printf("Token number is: %d\n", tokennum);
-    lseek(fd, (input-1)*sizeof(int), SEEK_SET);
+    lseek(fd, (input-1)*sizeof(int), SEEK_SET); // move the pointer at the end of the file
     write(fd, &tokennum, sizeof(int));
     printf("Critical section Ends\n");
-    sleep(15);
-    lock.l_type = F_UNLCK;
+    sleep(15); // waiting for fifteen seconds to simulate the critical section
+    lock.l_type = F_UNLCK; // unlocking the process
     fcntl(fd, F_SETLK, &lock);
     printf("Unlock successful\n");
     close(fd);

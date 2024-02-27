@@ -21,21 +21,21 @@ int main(int argc, char *argv[]){
 		return -1;
 	}
 	
-	int bytes_written = write(fd, "0123456789", 10);
+	int bytes_written = write(fd, "0123456789", 10); // write ten bytes of data into the file given by the user
 	if (bytes_written == -1){
 		perror("write");
 		return -1;
 	}
 	printf("Wrote %d bytes ot the file\n", bytes_written);
 
-	int offset = lseek(fd, 10, SEEK_CUR);
+	int offset = lseek(fd, 10, SEEK_CUR); // shift the pointer by ten bytes 
 	if (offset == -1 ){
 		perror("lseek");
 		return -1;
 	}
 	printf("Moved the filepointer by %d bytes\n",bytes_written);
 
-	bytes_written = write(fd, "abcdefghij", 10);
+	bytes_written = write(fd, "abcdefghij", 10); // write ten bytes again after changing the pointer
 	if (bytes_written == -1){
 		perror("write");
 		return -1;
